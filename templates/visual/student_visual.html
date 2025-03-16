@@ -1,0 +1,96 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生成绩查询</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <style>
+        .navbar {
+            border-radius: 0;
+        }
+        .score_label1{
+            width: 100px;
+            font-size: 20px;
+        }
+        .score_label2{
+            width: 200px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body style="background-color: #8cc58c">
+<div>
+    <div class="container-fluid navbar-fixed-top" style="background-color: #070707; color:#ffffff;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" style="font-size: 20px">教育数据可视化平台-学生可视化</span>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/Edu_visualization/userlogin/" style="color:#8c8484;">登录</a></li>
+                <li><a href="/Edu_visualization/logout/" style="color:#8c8484;">注销</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="bs-example" data-example-id="simple-jumbotron">
+        <div class="jumbotron" style="background-color: #bde1bd; margin-top: 50px">
+            <h1  style="margin-left: 150px">Hello, {{ request.session.info.sname }}!</h1>
+            <form method="get">
+                <div class="input-group">
+                    <input type="text" style="display: none" checked="checked" class="form-control" name="sid"
+                           placeholder="Search for..."
+                           value="{{ request.session.info.id }}">
+                    <button class="btn btn-success btn-lg" type="submit" style="margin-left: 150px"> 点击查询成绩...</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-default" style="width: 600px; margin: auto; border-radius: 20px;">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 成绩列表
+        </div>
+        <div class="form-horizontal" style="margin-left: 120px; margin-top: 50px; margin-bottom: 50px">
+            <div class="form-group">
+                <label class="col-sm-2 control-label score_label1">姓名：</label>
+                <label class="col-sm-2 control-label score_label2">  {{ request.session.info.sname }}</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label score_label1">班级：</label>
+                <label class="col-sm-2 control-label score_label2">  {{ request.session.info.classnum }}</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label score_label1">学号：</label>
+                <label class="col-sm-2 control-label score_label2">  {{ request.session.info.id }}</label>
+            </div>
+            {% for score in score_list %}
+                <div class="form-group">
+                    <label class="col-sm-2 control-label score_label1">
+                        {{ score.cid }}
+                    </label>
+                    <label class="col-sm-2 form-control score_label2">{{ score.grade }}</label>
+                </div>
+            {% endfor %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label score_label1">总分：</label>
+                <label class="col-sm-2 control-label score_label2">{{ grade_sum }}</label>
+            </div>
+        </div>
+    </div>
+    <div style="height: 300px;"></div>
+</div>
+
+    <script src="{% static 'js/jquery-min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.js' %}"></script>
+</body>
+</html>

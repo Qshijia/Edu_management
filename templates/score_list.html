@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-success" href="/score/add/">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                新建成绩数据
+            </a>
+            <div style="float: right; width: 300px">
+                <form method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="q" placeholder="请输入学生编号..."
+                               value="{{ search_data }}">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true" style="height: 20px;"></span>
+                        </button>
+                    </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 成绩列表
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>学生号</th>
+                    <th>课程号</th>
+                    <th>成绩</th>
+                    <th>班级</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for score in score_list %}
+                    <tr>
+                        <td>{{ score.id }}</td>
+                        <td>{{ score.sid }}</td>
+                        <td>{{ score.cid }}</td>
+                        <td>{{ score.grade }}</td>
+                        <td>{{ score.classnum }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="/score/{{ score.id }}/edit/">编辑 <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a class="btn btn-danger btn-xs" href="/score/{{ score.id }}/delete/">删除 <i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

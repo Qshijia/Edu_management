@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-success" href="/teacher/add/">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                新建教师信息
+            </a>
+            <div style="float: right; width: 300px">
+                <form method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="q" placeholder="请输入教师姓名..."
+                               value="{{ search_data }}">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true" style="height: 20px;"></span>
+                        </button>
+                    </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 教师列表
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>教师号</th>
+                    <th>教师名</th>
+                    <th>班级</th>
+                    <th>课程号</th>
+                    <th>职务</th>
+                    <th>密码</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for teacher in teacher_list %}
+                    <tr>
+                        <td>{{ teacher.id }}</td>
+                        <td>{{ teacher.tid }}</td>
+                        <td>{{ teacher.username }}</td>
+                        <td>{{ teacher.classnum }}</td>
+                        <td>{{ teacher.cid }}</td>
+                        <td>{{ teacher.appointment }}</td>
+                        <td>{{ teacher.password }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="/teacher/{{ teacher.id }}/edit/">编辑 <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a class="btn btn-danger btn-xs" href="/teacher/{{ teacher.id }}/delete/">删除 <i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

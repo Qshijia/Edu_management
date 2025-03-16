@@ -1,0 +1,79 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>教育数据管理</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <style>
+        .navbar {
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">教育数据可视化平台-管理端</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/student/list/">学生管理</a></li>
+                <li><a href="/teacher/list/">教师管理</a></li>
+                <li><a href="/course/list/">课程管理</a></li>
+                <li><a href="/score/list/">成绩管理</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login/">登录</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">{{ request.session.info.name }} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">个人资料</a></li>
+                        <li><a href="#">我的信息</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/logout/">注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div style="float: left;">
+        <div class="panel panel-primary" style="width: 250px; height: 620px; background-color: #1a2942;">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-user" aria-hidden="true"></i>  教育数据管理平台</h3>
+            </div>
+            <div class="panel-body">
+                <div class="bs-example" data-example-id="simple-nav-stacked">
+                    <ul class="nav nav-pills nav-stacked nav-pills-stacked-example" style="font-size: 20px">
+                        <li role="presentation"><a href="/admin/list/">管理员账户</a></li>
+                        <li role="presentation"><a href="/student/list/">学生管理</a></li>
+                        <li role="presentation"><a href="/teacher/list/">教师管理</a></li>
+                        <li role="presentation"><a href="/course/list/">课程管理</a></li>
+                        <li role="presentation"><a href="/score/list/">成绩管理</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="width:1050px; float: left; margin-left: 10px;">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+
+<script src="{% static 'js/jquery-min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.js' %}"></script>
+</body>
+</html>

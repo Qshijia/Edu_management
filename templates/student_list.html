@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div>
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-success" href="/student/add/">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                新建学生信息
+            </a>
+            <div style="float: right; width: 300px">
+                <form method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="q" placeholder="请输入学生姓名..."
+                               value="{{ search_data }}">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true" style="height: 20px;"></span>
+                        </button>
+                    </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 学生列表
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>学生号</th>
+                    <th>学生名</th>
+                    <th>班级</th>
+                    <th>密码</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for student in student_list %}
+                    <tr>
+                        <td>{{ student.id }}</td>
+                        <td>{{ student.sid }}</td>
+                        <td>{{ student.username }}</td>
+                        <td>{{ student.classnum }}</td>
+                        <td>{{ student.password }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="/student/{{ student.id }}/edit/">编辑 <i
+                                    class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a class="btn btn-danger btn-xs" href="/student/{{ student.id }}/delete/">删除 <i
+                                    class="fa fa-trash" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="clearfix">
+            <ul class="pagination">
+                {{ page_string }}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,163 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>教师学科分析</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <style>
+        .navbar {
+            border-radius: 0;
+        }
+
+        .score_label1 {
+            width: 100px;
+            font-size: 20px;
+        }
+
+        .score_label2 {
+            width: 200px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body style="background-color: #8cc58c">
+<div>
+    <div class="container-fluid navbar-fixed-top" style="background-color: #070707; color:#ffffff;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" style="font-size: 20px">教育数据可视化平台-学科可视化</span>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/Edu_visualization/userlogin/" style="color:#8c8484;">登录</a></li>
+                <li><a href="/Edu_visualization/logout/" style="color:#8c8484;">注销</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="bs-example" data-example-id="simple-jumbotron">
+        <div class="jumbotron" style="background-color: #bde1bd; margin-top: 50px">
+            <h1 style="margin-left: 150px">Hello, {{ request.session.info.tname }}老师!</h1>
+            <form method="get">
+                <div class="input-group">
+                    <input type="text" style="display: none" checked="checked" class="form-control" name="tid"
+                           placeholder="Search for..."
+                           value="{{ request.session.info.id }}">
+                    <button class="btn btn-success btn-lg" type="submit"
+                            style="margin-left: 150px"> {{ request.session.info.classnum }}班级{{ request.session.info.cid }}学科分析
+                    </button>
+                    <span>
+                        （提示：01为语文学科，02为数学学科，03为英语学科）
+                    </span>
+                </div>
+            </form>
+            {% if teacher.appointment == 1 %}
+                {% if teacher.classnum == '301' %}
+                    <a class="btn btn-default btn-lg" type="submit"
+                       style="margin-left: 150px" href="/Edu_visualization/class_visual301/"> {{ teacher.classnum }}班级教研分析
+                    </a>
+                {% elif teacher.classnum == '302' %}
+                    <a class="btn btn-default btn-lg" type="submit"
+                       style="margin-left: 150px" href="/Edu_visualization/class_visual302/"> {{ request.session.info.classnum }}班级教研分析
+                    </a>
+                {% elif teacher.classnum == '303' %}
+                    <a class="btn btn-default btn-lg" type="submit"
+                       style="margin-left: 150px" href="/Edu_visualization/class_visual303/"> {{ request.session.info.classnum }}班级教研分析
+                    </a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div>
+        <div class="panel panel-default" style="float:left; width: 550px; margin-left: 10px">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 成绩列表
+            </div>
+            <table class="table table-bordered table-hover" style="text-align: center">
+                <thead>
+                <tr>
+                    <th style="text-align: center">学生号</th>
+                    <th style="text-align: center">成绩</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for score in score_list %}
+                    <tr>
+                        <td>{{ score.sid }}</td>
+                        <td>{{ score.grade }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div style="float: left; margin-left: 10px; width:750px; background-color: #ffffff; ">
+
+            <div id="data_img_1">
+                {% if teacher.cid == '01' and teacher.classnum == '301' %}
+                    <iframe frameborder=0 src="show_line30101" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_liquid30101" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_box30101" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_bar01" width="100%" height="500"></iframe>
+                {% elif teacher.cid == '02' and teacher.classnum == '301' %}
+                    <iframe frameborder=0 src="show_line30102" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_liquid30102" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_box30102" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_bar02" width="100%" height="500"></iframe>
+                {% elif teacher.cid == '03' and teacher.classnum == '301' %}
+                    <iframe frameborder=0 src="show_line30103" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_liquid30103" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_box30103" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_bar03" width="100%" height="500"></iframe>
+                {% elif teacher.cid == '01' and teacher.classnum == '302' %}
+                    <iframe frameborder=0 src="show_line30201" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_liquid30202" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_box30201" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_bar01" width="100%" height="500"></iframe>
+                {% elif teacher.cid == '02' and teacher.classnum == '302' %}
+                    <iframe frameborder=0 src="show_line30202" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_liquid30202" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_box30202" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_bar02" width="100%" height="500"></iframe>
+                {% elif teacher.cid == '03' and teacher.classnum == '302' %}
+                    <iframe frameborder=0 src="show_line30203" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_liquid30203" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_box30203" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_bar03" width="100%" height="500"></iframe>
+                {% elif teacher.cid == '01' and teacher.classnum == '303' %}
+                    <iframe frameborder=0 src="show_line30301" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_liquid30301" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_box30301" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_bar01" width="100%" height="500"></iframe>
+                {% elif teacher.cid == '02' and teacher.classnum == '303' %}
+                    <iframe frameborder=0 src="show_line30302" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_liquid30302" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_box30302" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_bar02" width="100%" height="500"></iframe>
+                {% elif teacher.cid == '03' and teacher.classnum == '303' %}
+                    <iframe frameborder=0 src="show_line30303" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_liquid30303" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_box30303" width="100%" height="500"></iframe>
+                    <iframe frameborder=0 src="show_bar03" width="100%" height="500"></iframe>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="{% static 'js/jquery-min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.js' %}"></script>
+
+</body>
+</html>
